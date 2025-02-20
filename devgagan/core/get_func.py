@@ -204,7 +204,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             if chat in saved_channel_ids:
                 await app.edit_message_text(
                     message.chat.id, edit_id,
-                    "Sorry! This channel is protected by **__Team SPY__**."
+                    "Sorry! This channel is protected by **__Team NEXUZ__**."
                 )
                 return
             
@@ -682,7 +682,7 @@ async def callback_query_handler(event):
             [Button.inline(f"Pyrogram v2{pyrogram_check}", b'pyrogram')],
             [Button.inline(f"SpyLib v1 ⚡{telethon_check}", b'telethon')]
         ]
-        await event.edit("Choose your preferred upload method:\n\n__**Note:** **SpyLib ⚡**, built on Telethon(base), by Team SPY still in beta.__", buttons=buttons)
+        await event.edit("Choose your preferred upload method:\n\n__**Note:** **NEXUZ ⚡**, built on Telethon(base), by Team NEXUZ still in beta.__", buttons=buttons)
 
     elif event.data == b'pyrogram':
         save_user_upload_method(user_id, "Pyrogram")
@@ -893,7 +893,7 @@ async def handle_large_file(file, sender, edit, caption):
         if freecheck == 1:
             reply_markup = InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("💎 Get Premium to Forward", url="https://t.me/kingofpatal")]
+                    [InlineKeyboardButton("💎 Get Premium to Forward", url="https://t.me/NEXUZ_ELITE_BOT")]
                 ]
             )
             await app.copy_message(
@@ -1018,7 +1018,7 @@ def progress_callback(done, total, user_id):
     # Format the final output as needed
     final = (
         f"╭──────────────────╮\n"
-        f"│     **__SpyLib ⚡ Uploader__**       \n"
+        f"│     **__NEXUZ ⚡ Uploader__**       \n"
         f"├──────────\n"
         f"│ {progress_bar}\n\n"
         f"│ **__Progress:__** {percent:.2f}%\n"
@@ -1026,7 +1026,7 @@ def progress_callback(done, total, user_id):
         f"│ **__Speed:__** {speed_mbps:.2f} Mbps\n"
         f"│ **__ETA:__** {remaining_time_min:.2f} min\n"
         f"╰──────────────────╯\n\n"
-        f"**__Powered by Team SPY__**"
+        f"**__Powered by Team NEXUZ__**"
     )
     
     # Update tracking variables for the user
@@ -1089,7 +1089,7 @@ def dl_progress_callback(done, total, user_id):
         f"│ **__Speed:__** {speed_mbps:.2f} Mbps\n"
         f"│ **__ETA:__** {remaining_time_min:.2f} min\n"
         f"╰──────────────────╯\n\n"
-        f"**__Powered by Team SPY__**"
+        f"**__Powered by Team NEXUZ__**"
     )
     
     # Update tracking variables for the user
