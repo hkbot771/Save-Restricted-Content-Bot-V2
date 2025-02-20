@@ -90,7 +90,7 @@ async def process_audio(client, event, url, cookies_env_var=None):
             temp_cookie_path = temp_cookie_file.name
  
     start_time = time.time()
-    random_filename = f"@team_spy_pro_{event.sender_id}"
+    random_filename = f"@joinnexuz_{event.sender_id}"
     download_path = f"{random_filename}.mp3"
  
     ydl_opts = {
@@ -150,7 +150,7 @@ async def process_audio(client, event, url, cookies_env_var=None):
                 name=None,
                 progress_bar_function=lambda done, total: progress_callback(done, total, chat_id)
             )
-            await client.send_file(chat_id, uploaded, caption=f"**{title}**\n\n**__Powered by Team SPY__**")
+            await client.send_file(chat_id, uploaded, caption=f"**{title}**\n\n**__Powered by Team NEXUZ__**")
             if prog:
                 await prog.delete()
         else:
