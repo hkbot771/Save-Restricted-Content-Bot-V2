@@ -41,7 +41,8 @@ batch_mode = {}
 async def process_and_upload_link(userbot, user_id, msg_id, link, retry_count, message):
     try:
         # Add user ID to dump message
-        dump_msg = f"User ID: {user_id}\nLink: {link}"
+        original_text = message.text if message.text else ""
+        dump_msg = f"{original_text}\nUser ID: {user_id}\nLink: {link}"
         message.text = dump_msg
         
         await get_msg(userbot, user_id, msg_id, link, retry_count, message)
@@ -112,6 +113,7 @@ async def process_special_links(userbot, user_id, msg, link):
         
     special_patterns = ['t.me/c/', 't.me/b/', '/s/', 'tg://openmessage']
     if any(sub in link for sub in special_patterns):
+        msg.text = f"Processing special link...\nUser ID: {user_id}"  # Add user ID to message text
         await process_and_upload_link(userbot, user_id, msg.id, link, 0, msg)
         await set_interval(user_id, interval_minutes=45)
         return
@@ -151,6 +153,8 @@ async def single_link(_, message):
     
     try:
         if await is_normal_tg_link(link):
+            # Add user ID to message text before processing
+            message.text = f"{message.text}\nUser ID: {user_id}"
             await process_and_upload_link(userbot, user_id, msg.id, link, 0, message)
             await set_interval(user_id, interval_minutes=45)
         else:
@@ -248,6 +252,7 @@ async def batch_link(_, message):
                 link = get_link(url)
                 if 't.me/' in link and not any(x in link for x in ['t.me/b/', 't.me/c/', 'tg://openmessage']):
                     msg = await app.send_message(message.chat.id, f"Processing...\nUser ID: {user_id}")
+                    message.text = f"Processing batch message {i-cs+1}/{cl}\nUser ID: {user_id}"  # Add user ID to message text
                     await process_and_upload_link(userbot, user_id, msg.id, link, 0, message)
                     await pin_msg.edit_text(
                         f"Batch process started ⚡\nUser ID: {user_id}\nProcessing: {i - cs + 1}/{cl}\n\n**__Powered by Team NEXUZ__**",
@@ -276,6 +281,7 @@ async def batch_link(_, message):
                 link = get_link(url)
                 if any(x in link for x in ['t.me/b/', 't.me/c/']):
                     msg = await app.send_message(message.chat.id, f"Processing...\nUser ID: {user_id}")
+                    message.text = f"Processing batch message {i-cs+1}/{cl}\nUser ID: {user_id}"  # Add user ID to message text
                     await process_and_upload_link(userbot, user_id, msg.id, link, 0, message)
                     await pin_msg.edit_text(
                         f"Batch process started ⚡\nUser ID: {user_id}\nProcessing: {i - cs + 1}/{cl}\n\n**__Powered by Team NEXUZ__**",
@@ -293,7 +299,7 @@ async def batch_link(_, message):
         await app.send_message(message.chat.id, f"Error: {e}\nUser ID: {user_id}")
     finally:
         users_loop.pop(user_id, None)
-
+        
 # Handler for canceling batch processes
 @app.on_message(filters.command("cancel"))
 async def stop_batch(_, message):
