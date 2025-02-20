@@ -73,8 +73,8 @@ async def token_handler(client, message):
     msg = await app.get_messages(chat_id, 796)
     user_id = message.chat.id
     if len(message.command) <= 1:
-        image_url = "https://envs.sh/dTd.jpg
-                "
+        image_url = "https://envs.sh/dTd.jpg"
+                
         join_button = InlineKeyboardButton("Join Channel", url="https://t.me/joinnexuz")
         premium = InlineKeyboardButton("Get Premium", url="https://t.me/NEXUZ_ELITE_BOT")   
         keyboard = InlineKeyboardMarkup([
