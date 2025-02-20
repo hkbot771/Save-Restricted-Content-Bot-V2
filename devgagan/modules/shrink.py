@@ -83,15 +83,23 @@ async def token_handler(client, message):
         ])
          
         await message.reply_photo(
-            msg.photo.file_id,
-            caption=(
-                "Hi 👋 Welcome, Wanna intro...?\n\n"
-                "✳️ I can save posts from channels or groups where forwarding is off. I can download videos/audio from YT, INSTA, ... social platforms\n"
-                "✳️ Simply send the post link of a public channel. For private channels, do /login. Send /help to know more."
-            ),
-            reply_markup=keyboard
-        )
-        return  
+    msg.photo.file_id,
+    caption=(
+        "🌟 **Welcome Aboard!** 👋\n\n"
+        "🚀 **I'm your ultimate content-saving assistant!**\n"
+        "🔹 Save posts from **restricted channels & groups**\n"
+        "🔹 Download **videos & audio** from YT, Insta, and more\n"
+        "🔹 Hassle-free access to **premium content**\n\n"
+        "📩 **How to use?**\n"
+        "✅ Send a **public channel post link**\n"
+        "✅ For **private channels**, use /login\n"
+        "✅ Need help? Just send /help!\n\n"
+        "✨ **Let’s get started! 🚀**"
+    ),
+    reply_markup=keyboard
+)
+return  
+
  
     param = message.command[1] if len(message.command) > 1 else None
     freecheck = await chk_user(message, user_id)
