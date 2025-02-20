@@ -64,21 +64,19 @@ async def is_user_verified(user_id):
  
  @app.on_message(filters.command("start"))
 async def token_handler(client, message):
-    """Handle the /start command."""
+    """Handle the /token command."""
     join = await subscribe(client, message)
     if join == 1:
         return
-    
     chat_id = "save_restricted_content_bots"
     msg = await app.get_messages(chat_id, 796)
     user_id = message.chat.id
-    
     if len(message.command) <= 1:
         join_button = InlineKeyboardButton("Join Channel", url="https://t.me/APEXCREED")
         premium = InlineKeyboardButton("Get Premium", url="https://t.me/NEXUZ_ELITE_BOT")   
         keyboard = InlineKeyboardMarkup([
-            [join_button],   
-            [premium]    
+            [join_button],
+            [premium]
         ])
         
         await message.reply_text(
@@ -94,6 +92,7 @@ async def token_handler(client, message):
             "✨ **Let's get started! 🚀**",
             reply_markup=keyboard
         )
+    return
      
  
     param = message.command[1] if len(message.command) > 1 else None
