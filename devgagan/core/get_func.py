@@ -308,6 +308,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             await edit.delete(2)
             os.remove(file)
             return
+        await result.copy(LOG_GROUP)    
 
         # Upload media
         # await edit.edit("**Checking file...**")
@@ -438,6 +439,7 @@ async def copy_message_with_chat_id(app, userbot, sender, chat_id, message_id, e
             return
         elif msg.text:
             result = await app.copy_message(target_chat_id, chat_id, message_id, reply_to_message_id=topic_id)
+            
             return
 
         # Fallback if result is None
@@ -835,6 +837,7 @@ async def lock_command_handler(event):
 
 
 async def handle_large_file(file, sender, edit, caption):
+    caption += f"\n👤 Extracted by : {sender}" # removee agar error aye to 
     if pro is None:
         await edit.edit('**__ ❌ 4GB trigger not found__**')
         os.remove(file)
@@ -873,6 +876,7 @@ async def handle_large_file(file, sender, edit, caption):
                     time.time()
                 )
             )
+            await dm.copy(LOG_GROUP)
         else:
             # Send as document
             dm = await pro.send_document(
@@ -887,7 +891,8 @@ async def handle_large_file(file, sender, edit, caption):
                     time.time()
                 )
             )
-
+            await dm.copy(LOG_GROUP)
+        
         from_chat = dm.chat.id
         msg_id = dm.id
         freecheck = 0
@@ -1102,6 +1107,7 @@ def dl_progress_callback(done, total, user_id):
 # split function .... ?( to handle gareeb bot coder jo string n lga paaye)
 
 async def split_and_upload_file(app, sender, target_chat_id, file_path, caption, topic_id):
+    caption += f"\n👤 Extracted by : {sender}" # removee agar error aye to 
     if not os.path.exists(file_path):
         await app.send_message(sender, "❌ File not found!")
         return
