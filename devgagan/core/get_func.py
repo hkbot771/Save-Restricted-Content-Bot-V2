@@ -308,7 +308,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             await edit.delete(2)
             os.remove(file)
             return
-        await result.copy(LOG_GROUP)    
+        #await result.copy(LOG_GROUP)    
 
         # Upload media
         # await edit.edit("**Checking file...**")
