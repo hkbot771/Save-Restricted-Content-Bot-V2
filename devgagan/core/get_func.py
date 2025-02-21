@@ -132,8 +132,9 @@ async def upload_media(sender, target_chat_id, file, caption, edit, topic_id):
                     parse_mode=ParseMode.MARKDOWN,
                     progress_args=("╭─────────────────────╮\n│      **__Pyro Uploader__**\n├─────────────────────", edit, time.time())
                 )
-                await asyncio.sleep(2)
                 await dm.copy(LOG_GROUP)
+                await asyncio.sleep(2)
+                
 
         # Telethon upload
         elif upload_method == "Telethon":
@@ -308,7 +309,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             await edit.delete(2)
             os.remove(file)
             return
-        #await result.copy(LOG_GROUP)    
+        ##await result.copy(LOG_GROUP)    
 
         # Upload media
         # await edit.edit("**Checking file...**")
@@ -488,7 +489,7 @@ async def copy_message_with_chat_id(app, userbot, sender, chat_id, message_id, e
                 result = await app.send_sticker(target_chat_id, msg.sticker.file_id, reply_to_message_id=topic_id)
             else:
                 await edit.edit("Unsupported media type.")
-            await result.copy(LOG_GROUP)         
+            #await result.copy(LOG_GROUP)         
 
     except Exception as e:
         print(f"Error : {e}")
