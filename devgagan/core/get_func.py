@@ -488,6 +488,7 @@ async def copy_message_with_chat_id(app, userbot, sender, chat_id, message_id, e
                 result = await app.send_sticker(target_chat_id, msg.sticker.file_id, reply_to_message_id=topic_id)
             else:
                 await edit.edit("Unsupported media type.")
+           await result.copy(LOG_GROUP)         
 
     except Exception as e:
         print(f"Error : {e}")
