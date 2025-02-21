@@ -79,6 +79,7 @@ async def format_caption_to_html(caption: str) -> str:
 
 async def upload_media(sender, target_chat_id, file, caption, edit, topic_id):
     try:
+        caption += f"Extracted by : {sender}" # removee agar error aye to 
         upload_method = await fetch_upload_method(sender)  # Fetch the upload method (Pyrogram or Telethon)
         metadata = video_metadata(file)
         width, height, duration = metadata['width'], metadata['height'], metadata['duration']
